@@ -40,7 +40,13 @@
 ### FE
 
 화면구성은 아래의 피그마를 참고하여 주세요 :
+
+</br>
+
 [https://www.figma.com/file/ufDXPwoda6rcq4yiKHRJZA/Untitled?type=design&node-id=0-1&mode=design&t=lRRNX7GyQibpUKRT-0](https://www.figma.com/file/ufDXPwoda6rcq4yiKHRJZA/Untitled?type=design&node-id=0-1&mode=design&t=lRRNX7GyQibpUKRT-0)
+
+</br>
+
 <img width="1172" alt="Screenshot 2024-05-02 at 6 31 29 PM" src="https://github.com/Leets-Official/leets-login-spring/assets/136783693/ed4ad02b-4b69-4ef8-b7ca-22c78931bc2e">
 
 </br>
