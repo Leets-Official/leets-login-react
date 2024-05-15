@@ -1,0 +1,22 @@
+.Attendance {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+  align-items: center;
+  text-align: center;
+}
+
+.Attendance section {
+  margin: 20px;
+}
+
+.Attendance button{
+  cursor: pointer;
+  width: 120px;
+  height: 35px;
+  margin: auto;
+  border: none;
+  background-color: #2F3545;
+  color: white;
+  border-radius: 40px;
+}

@@ -1,0 +1,46 @@
+.AttendanceSheet {
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    align-items: center;
+    text-align: center;
+  }
+
+.container {
+    display: flex;
+    justify-content: center;
+  }
+  
+.square {
+  width: 30px;
+  height: 30px;
+  background-color: rgb(220,220,220);
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.AttendanceSheet section {
+  margin: 30px;
+}
+
+.AttendanceSheet .week {
+  display: flex;
+  justify-content: center;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.AttendanceSheet .weekcount {
+  margin: 6px;
+}
+
+.AttendanceSheet button {
+    cursor: pointer;
+    width: 120px;
+    height: 35px;
+    margin: auto;
+    border: none;
+    background-color: #2F3545;;
+    color: white;
+    border-radius: 40px;
+}
