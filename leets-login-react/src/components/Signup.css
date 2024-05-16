@@ -41,6 +41,7 @@
   
 
 .Signup .confirm-button {
+    width: 120px;
     padding: 15px;
     background-color: #007bff; 
     color: #ffffff; 

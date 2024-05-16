@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-//import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
 import "./Signup.css";
 
 function Signup() {
@@ -10,15 +10,13 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   
-  //const history = useNavigate();
 
   const handleSignup = () => {
     if (password !== confirmPassword) {
       setError('비밀번호가 일치하지 않습니다.');
     } else {
       alert('회원가입이 완료되었습니다.');
-      // 회원가입 후 로그인 페이지로 이동하는 코드 추가
-      //history.push(`/Login?name=${encodeURIComponent(name)}&part=${encodeURIComponent(part)}`);
+      
     }
   };
 
@@ -63,7 +61,7 @@ function Signup() {
           />
         </div>
       </div>
-      <button onClick={handleSignup}>회원가입</button>
+      <Link to="/" className='button-link' onClick={handleSignup}>회원가입</Link>
       {error && <p>{error}</p>}
     </div>
   );

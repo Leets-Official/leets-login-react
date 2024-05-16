@@ -1,11 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; 
 import "./AttendLog.css";
 
 function AttendLog({ name, part }) {
   const currentDate = new Date().toLocaleDateString();
 
   const handleAttendance = () => {
-    // 출석 처리 로직
     alert('출석되었습니다.');
   };
 
@@ -18,7 +18,7 @@ function AttendLog({ name, part }) {
       </div>
       <p> {currentDate}</p>
       <p>출석하시겠습니까?</p>
-      <button onClick={handleAttendance}>출석하기</button>
+      <Link to="/attendance" className="button-link" onClick={handleAttendance}>출석하기</Link>
     </div>
   );
 }

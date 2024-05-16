@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; 
 import './Login.css'; 
 
 const Login = () => {
@@ -7,12 +8,8 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault(); 
-    // 로그인 로직 구현
     console.log(`Username: ${username}, Password: ${password}`);
-  };
-
-  const handleSignup = () => {
-    window.location.replace('./components/Signup') ; 
+    window.location.href = '/attendlog'; 
   };
 
   return (
@@ -32,7 +29,7 @@ const Login = () => {
         className="login-input"
       />
       <button onClick={handleLogin}>로그인하기</button>
-      <button onClick={handleSignup}>회원가입</button> 
+      <Link to="/signup" className="button-link">회원가입</Link>
     </div>
   );
 };
