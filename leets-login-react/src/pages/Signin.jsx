@@ -1,77 +1,94 @@
-
-import "./Signin.css"
 import { useState, useContext } from "react";
-import { LoginContext } from '../App'
+import { firebaseAuth, createUserWithEmailAndPassword } from "../firebase";
+import { LoginContext } from '../App';
 import { useNavigate } from "react-router-dom";
+import "./Signin.css";
 
-const Signin= () => {
+const Signin = () => {
+    const { onCreateId, onCreatePassword } = useContext(LoginContext);
 
-    const {onCreateId} = useContext(LoginContext);
+    const [registerEmail, setRegisterEmail] = useState("");
+    const [registerPassword, setRegisterPassword] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
 
-    const [id,setId] = useState("");
-    const [password,setPassword] = useState("");
     const nav = useNavigate();
 
-    const onClickButton= () => {
+    const onClickButton = () => {
         nav("/login");
-    }
+    };
 
-    const onKeydown = (e) =>{
-        if(e.keyCode === 13) {
-            onSubmit();
+    const onChangeEmail = (e) => {
+        setRegisterEmail(e.target.value);
+    };
+
+    const onChangePassword = (e) => {
+        setRegisterPassword(e.target.value);
+    };
+
+    const register = async () => {
+        try {
+            setErrorMsg("");
+            const createdUser = await createUserWithEmailAndPassword(firebaseAuth, registerEmail, registerPassword);
+            console.log(createdUser);
+            setRegisterEmail("");
+            setRegisterPassword("");
+        } catch (err) {
+            switch (err.code) {
+                case 'auth/weak-password':
+                    setErrorMsg('비밀번호는 6자리 이상이어야 합니다');
+                    break;
+                case 'auth/invalid-email':
+                    setErrorMsg('잘못된 이메일 주소입니다');
+                    break;
+                case 'auth/email-already-in-use':
+                    setErrorMsg('이미 가입되어 있는 계정입니다');
+                    break;
+                case 'auth/internal-error':
+                    setErrorMsg('잘못된 요청입니다');
+                    break;
+                case 'auth/network-request-failed':
+                    setErrorMsg('네트워크 요청을 실패했습니다');
+                    break;
+                default:
+                    setErrorMsg('알 수 없는 오류가 발생했습니다');
+                    break;
+            }
         }
-    }
+    };
 
-    const onChangeId= (e) => {
-        setId(e.target.value);
-    }
-
-    const onChangePassword= (e) => {
-        setPassword(e.target.value);
-        if(e.keyCode === 13) {
-            onCreateId(password);
-        }
-    }
-
-    const onSubmit= () =>{
-        onCreateId(id);
-    }
+    const onSubmit = async (e) => {
+        onCreateId(registerEmail);
+        onCreatePassword(registerPassword);
+        await register();
+    };
 
     return (
         <div className="Signin">
             <h1>회원가입</h1>
             <input
-                value = {id}
-                onChange={onChangeId}
-                onKeyDown={onKeydown}
+                value={registerEmail}
+                onChange={onChangeEmail}
                 placeholder={"이메일을 입력해주세요"}
             />
-            <button
-            className="idButton"
-            onClick={onSubmit}
-            >
-            이메일 확인
-            </button>
-
             <input
-            value = {password}
-            onChange={onChangePassword}
-            onKeyDown={onKeydown}
-            placeholder={"비밀번호를 입력해주세요"}
+                type="password"
+                value={registerPassword}
+                onChange={onChangePassword}
+                placeholder={"비밀번호를 입력해주세요"}
             />
-            <input
-            placeholder={"비밀번호를 한 번 더 입력해주세요"}
+            {/* <input
+                type="password"
+                value={registerPassword}
+                onChange={onChangePassword}
+                placeholder={"비밀번호를 한 번 더 입력해주세요"}
             />
-       
             <div className="namepart">
-            <input
-                placeholder={"이름을 입력해주세요"}/>
-            <input
-                placeholder={"파트를 입력해주세요"}/>
-            </div>
-            
-            <button onClick={onClickButton}>회원가입</button>
-            
+                <input placeholder={"이름을 입력해주세요"}/>
+                <input placeholder={"파트를 입력해주세요"}/>
+            </div> */}
+            {errorMsg && <p className="error-msg">{errorMsg}</p>}
+            <button onClick={onSubmit}>회원가입</button>
+            <button onClick={onClickButton}>로그인하러 가기</button>
         </div>
     );
 };
