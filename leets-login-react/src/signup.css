@@ -1,0 +1,61 @@
+.signup{
+    box-sizing: border-box;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.signup input {
+    background-color: gainsboro;
+    font-size: 15px;
+    border-radius: 50px 50px;
+    padding: 30px 30px;
+    margin-bottom: 0px;
+    width: 400px;
+    margin-top: 50px;
+    border-color: gainsboro;
+    border: none;
+    &::placeholder {
+        color: black;
+        text-align: center;
+      }
+}
+
+.name input{
+    background-color: gainsboro;
+    font-size: 15px;
+    border-radius: 50px 50px;
+    padding: 30px 30px;
+    margin-bottom: 0px;
+    width: 200px;
+    margin-top: 50px;
+    border-color: gainsboro;
+    float: left;
+    border: none;
+    &::placeholder {
+        color: black;
+        text-align: center;
+      }
+}
+.part input{
+    background-color: gainsboro;
+    font-size: 15px;
+    border-radius: 50px 50px;
+    padding: 30px 30px;
+    margin-bottom: 50px;
+    width: 200px;
+    margin-top: 50px;
+    border-color: gainsboro;
+    border: none;
+    float: right;
+    &::placeholder {
+        color: black;
+        text-align: center;
+    }
+}
+
+.signup button {
+    cursor: pointer;
+    width: 80px;
+    border: none;
+    border-radius: 5px;
+}
