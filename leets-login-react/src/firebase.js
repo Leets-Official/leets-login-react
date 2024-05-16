@@ -7,13 +7,14 @@ import { getAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword } 
 //
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_FB_API_KEY,
-    authDomain: process.env.REACT_APP_FB_AUTH_DOMAIN,
-    projectId: process.env.REACT_APP_FB_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_FB_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_FB_MESSAGING_SENDER_ID,
-    appId: process.env.REACT_APP_FB_API_ID
-};
+    apiKey: "AIzaSyDZ2NXwf8C7Q_L0hBpMznIETnxM8___MMg",
+    authDomain: "leets-login-react-793c1.firebaseapp.com",
+    projectId: "leets-login-react-793c1",
+    storageBucket: "leets-login-react-793c1.appspot.com",
+    messagingSenderId: "86055632259",
+    appId: "1:86055632259:web:5d7f9045b0d665badbcab6",
+    measurementId: "G-19M7MVM2K6"
+  };
 //
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);

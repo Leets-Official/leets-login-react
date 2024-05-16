@@ -26,3 +26,7 @@
     color: white;
     border-radius: 40px;
 }
+
+.Login .error-msg {
+    color: red;
+}

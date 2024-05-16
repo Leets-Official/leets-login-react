@@ -5,11 +5,12 @@ import { useNavigate } from 'react-router-dom';
 
 const Attendance= () => {
 
-    const {name, part, formattedDate} = useContext(LoginContext);
+    let {name, part, formattedDate, todayAttendance} = useContext(LoginContext);
     const nav = useNavigate();
 
     const onClickButton=() =>{
-        nav("/attendancesheet");
+        todayAttendance = true;
+        nav("/attendancesheet", { todayAttendance });
     }
 
     return (

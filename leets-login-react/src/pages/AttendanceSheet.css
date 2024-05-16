@@ -19,6 +19,10 @@
   border-radius: 5px;
 }
 
+.square.attended {
+  background-color: green;
+}
+
 .AttendanceSheet section {
   margin: 30px;
 }

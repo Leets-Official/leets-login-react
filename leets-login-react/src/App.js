@@ -14,15 +14,26 @@ function App() {
   let part="FE";
   const today = new Date();
   const formattedDate = `${today.getFullYear()}.${today.getMonth()+1}.${today.getDate()}`;
-  
-  const onCreateId = (id) => {
-    const newId = id;
-    console.log(newId)
+  let todayAttendance=false;
+
+  const onCreateId = (Id) => {
+    const newId = Id;
+    console.log(newId);
   }
 
   const onCreatePassword = (password) => {
     const newPassword = password;
-    console.log(newPassword)
+    console.log(newPassword);
+  }
+
+  const onCreateName = (name) => {
+    const newName = name;
+    console.log(newName);
+  }
+
+  const onCreatePart = (part) => {
+    const newPart = part;
+    console.log(newPart);
   }
 
   const nav = useNavigate();
@@ -37,7 +48,7 @@ function App() {
       </div>
 
       <LoginContext.Provider value={{
-        onCreateId, onCreatePassword, name, part, formattedDate
+        onCreatePassword, onCreateName, onCreatePart, name, part, formattedDate, todayAttendance
       }}>
         <Routes>
           <Route path="/" element={<Home/>}/>

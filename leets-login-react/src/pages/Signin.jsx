@@ -2,20 +2,20 @@ import { useState, useContext } from "react";
 import { firebaseAuth, createUserWithEmailAndPassword } from "../firebase";
 import { LoginContext } from '../App';
 import { useNavigate } from "react-router-dom";
+
 import "./Signin.css";
 
 const Signin = () => {
     const { onCreateId, onCreatePassword } = useContext(LoginContext);
 
+    const [errorMsg, setErrorMsg] = useState("");
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
-    const [errorMsg, setErrorMsg] = useState("");
+    // const [confirmPassword, setConfirmPassword] = useState("");
+    // const [name, setName] = useState("");
+    // const [part, setPart] = useState("");
 
     const nav = useNavigate();
-
-    const onClickButton = () => {
-        nav("/login");
-    };
 
     const onChangeEmail = (e) => {
         setRegisterEmail(e.target.value);
@@ -25,13 +25,32 @@ const Signin = () => {
         setRegisterPassword(e.target.value);
     };
 
+    // const onChangeConfirmPassword = (e) => {
+    //     setConfirmPassword(e.target.value);
+    // }
+
+    // const onChangeName = (e) => {
+    //     setName(e.target.value);
+    // }
+    
+    // const onChangePart = (e) => {
+    //     setPart(e.target.value);
+    // }
+
     const register = async () => {
         try {
             setErrorMsg("");
             const createdUser = await createUserWithEmailAndPassword(firebaseAuth, registerEmail, registerPassword);
             console.log(createdUser);
+            onCreateId(registerEmail);
+            onCreatePassword(registerPassword);
+            // onCreateName(name);
+            // onCreatePart(part);
+            // console.log(name);
+            // console.log(part);
             setRegisterEmail("");
             setRegisterPassword("");
+            nav("/login");
         } catch (err) {
             switch (err.code) {
                 case 'auth/weak-password':
@@ -51,14 +70,11 @@ const Signin = () => {
                     break;
                 default:
                     setErrorMsg('알 수 없는 오류가 발생했습니다');
-                    break;
             }
         }
     };
 
     const onSubmit = async (e) => {
-        onCreateId(registerEmail);
-        onCreatePassword(registerPassword);
         await register();
     };
 
@@ -78,17 +94,25 @@ const Signin = () => {
             />
             {/* <input
                 type="password"
-                value={registerPassword}
-                onChange={onChangePassword}
+                value={confirmPassword}
+                onChange={onChangeConfirmPassword}
                 placeholder={"비밀번호를 한 번 더 입력해주세요"}
             />
             <div className="namepart">
-                <input placeholder={"이름을 입력해주세요"}/>
-                <input placeholder={"파트를 입력해주세요"}/>
+                <input
+                value={name}
+                onChange={onChangeName}
+                placeholder={"이름을 입력해주세요"}
+                />
+                <input 
+                value={part} 
+                onChange={onChangePart}
+                placeholder={"파트를 입력해주세요"}
+                />
             </div> */}
             {errorMsg && <p className="error-msg">{errorMsg}</p>}
             <button onClick={onSubmit}>회원가입</button>
-            <button onClick={onClickButton}>로그인하러 가기</button>
+            <button onClick={register}>로그인하러 가기</button>
         </div>
     );
 };
