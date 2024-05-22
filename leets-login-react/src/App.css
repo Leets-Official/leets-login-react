@@ -1,5 +1,25 @@
 .App {
+  width: 500px;
+  margin: 0 auto;
   text-align: center;
+}
+
+.App div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App button {
+  cursor: pointer;
+  width: 120px;
+  height: 35px;
+  margin: auto;
+  margin-top: 20px;
+  border: none;
+  background-color: white;
+  color: black;
+  border-radius: 40px;
 }
 
 .App-logo {
