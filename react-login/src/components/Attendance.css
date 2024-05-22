@@ -1,0 +1,44 @@
+.Attendance {
+    text-align: center;
+  }
+  
+  .attendance-weeks {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .attendance-week {
+    width: 70px;
+    height: 50px;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 5px;
+    padding:5px;
+  }
+  
+  .attendance-week.checked {
+    background-color: rgb(97,147,255);
+    color: white;
+    border-radius: 5px;
+    padding:5px;
+    margin:10px;
+  }
+
+  .Attendance button{
+    cursor:pointer;
+    width: 100px;
+    height: 40px;
+    border: none;
+    background: rgb(37,147,255);
+    color: white;
+    border-radius: 5px;
+    margin: 20px auto;
+}
+
+.attendanceMsg{
+  margin:20px;
+}
