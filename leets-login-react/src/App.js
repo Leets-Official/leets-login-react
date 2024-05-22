@@ -1,5 +1,5 @@
 import './App.css';
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 import { Routes, Route, useNavigate } from "react-router-dom"
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -10,30 +10,30 @@ import AttendanceSheet from './pages/AttendanceSheet';
 export const LoginContext = createContext();
 
 function App() {
-  let name="박예진";
-  let part="FE";
+  
+  const [name, setName] = useState("");
+  const [part, setPart] = useState("");
   const today = new Date();
   const formattedDate = `${today.getFullYear()}.${today.getMonth()+1}.${today.getDate()}`;
-  let todayAttendance=false;
 
   const onCreateId = (Id) => {
     const newId = Id;
-    console.log(newId);
   }
 
   const onCreatePassword = (password) => {
     const newPassword = password;
-    console.log(newPassword);
+  }
+
+  const onCreateConfirmPassword = (confirmPassword) => {
+    const newConfirmPassword = confirmPassword;
   }
 
   const onCreateName = (name) => {
-    const newName = name;
-    console.log(newName);
+    setName(name);
   }
 
   const onCreatePart = (part) => {
-    const newPart = part;
-    console.log(newPart);
+    setPart(part)
   }
 
   const nav = useNavigate();
@@ -48,7 +48,7 @@ function App() {
       </div>
 
       <LoginContext.Provider value={{
-        onCreatePassword, onCreateName, onCreatePart, name, part, formattedDate, todayAttendance
+        onCreateId, onCreatePassword, onCreateConfirmPassword, onCreateName, onCreatePart, name, part, formattedDate
       }}>
         <Routes>
           <Route path="/" element={<Home/>}/>

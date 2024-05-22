@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword, fetchSignInMethodsForEmail } from "firebase/auth";
 //
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -20,5 +20,4 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const firebaseAuth = getAuth(firebaseApp);
 //
-// 꼭 이렇게 해야하는 건 아니니까 편한대로 해당 스크립트에서 import해서 사용해도 된다
-export { firebaseAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword };
+export { firebaseAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword, fetchSignInMethodsForEmail };

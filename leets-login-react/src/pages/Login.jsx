@@ -29,15 +29,10 @@ const Login= () => {
             setTypingPassword("")
             nav("/Attendance");
         } catch(err) {
+            console.error("Login error: ", err);
             switch (err.code) {
-                case "auth/user-not-found":
-                    setErrorMsg("아이디가 존재하지 않습니다");
-                    break;
-                case 'auth/wrong-password':
-                    setErrorMsg("비밀번호가 일치하지 않습니다");
-                    break;
-                case 'auth/invalid-email':
-                    setErrorMsg('잘못된 이메일 주소입니다');
+                case "auth/invalid-credential":
+                    setErrorMsg("이메일 혹은 아이디를 다시 확인해주세요.");
                     break;
                 default:
                     setErrorMsg("알 수 없는 오류입니다");
@@ -61,6 +56,8 @@ const Login= () => {
             placeholder={"비밀번호를 입력해주세요"}/>
         {errorMsg && <p className="error-msg">{errorMsg}</p>}
         <button onClick={login}>로그인</button>
+
+        <p className="signup-link">아직 회원이 아니신가요? <a href="/Signin">회원가입</a></p>
         </div>
     );
 };

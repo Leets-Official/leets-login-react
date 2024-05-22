@@ -1,19 +1,20 @@
 import { useState, useContext } from "react";
-import { firebaseAuth, createUserWithEmailAndPassword } from "../firebase";
+import { firebaseAuth, createUserWithEmailAndPassword, fetchSignInMethodsForEmail } from "../firebase";
 import { LoginContext } from '../App';
 import { useNavigate } from "react-router-dom";
 
 import "./Signin.css";
 
 const Signin = () => {
-    const { onCreateId, onCreatePassword } = useContext(LoginContext);
+    const { onCreateId, onCreatePassword, onCreateConfirmPassword, onCreateName, onCreatePart } = useContext(LoginContext);
 
     const [errorMsg, setErrorMsg] = useState("");
+    const [emailErrorMsg, setEmailErrorMsg] = useState("");
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
-    // const [confirmPassword, setConfirmPassword] = useState("");
-    // const [name, setName] = useState("");
-    // const [part, setPart] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [name, setName] = useState("");
+    const [part, setPart] = useState("");
 
     const nav = useNavigate();
 
@@ -25,42 +26,41 @@ const Signin = () => {
         setRegisterPassword(e.target.value);
     };
 
-    // const onChangeConfirmPassword = (e) => {
-    //     setConfirmPassword(e.target.value);
-    // }
+    const onChangeConfirmPassword = (e) => {
+        setConfirmPassword(e.target.value);
+    }
 
-    // const onChangeName = (e) => {
-    //     setName(e.target.value);
-    // }
+    const onChangeName = (e) => {
+        setName(e.target.value);
+    }
     
-    // const onChangePart = (e) => {
-    //     setPart(e.target.value);
-    // }
+    const onChangePart = (e) => {
+        setPart(e.target.value);
+    }
 
     const register = async () => {
         try {
             setErrorMsg("");
-            const createdUser = await createUserWithEmailAndPassword(firebaseAuth, registerEmail, registerPassword);
-            console.log(createdUser);
+            await createUserWithEmailAndPassword(firebaseAuth, registerEmail, registerPassword);
+
             onCreateId(registerEmail);
             onCreatePassword(registerPassword);
-            // onCreateName(name);
-            // onCreatePart(part);
-            // console.log(name);
-            // console.log(part);
+            onCreateConfirmPassword(confirmPassword);
+            onCreateName(name);
+            onCreatePart(part);
+
             setRegisterEmail("");
             setRegisterPassword("");
+            alert('회원가입이 완료되었습니다.');
             nav("/login");
         } catch (err) {
+            console.error("Login error: ", err);
             switch (err.code) {
                 case 'auth/weak-password':
                     setErrorMsg('비밀번호는 6자리 이상이어야 합니다');
                     break;
                 case 'auth/invalid-email':
-                    setErrorMsg('잘못된 이메일 주소입니다');
-                    break;
-                case 'auth/email-already-in-use':
-                    setErrorMsg('이미 가입되어 있는 계정입니다');
+                    setErrorMsg('이메일 주소를 다시 확인해주세요');
                     break;
                 case 'auth/internal-error':
                     setErrorMsg('잘못된 요청입니다');
@@ -75,8 +75,23 @@ const Signin = () => {
     };
 
     const onSubmit = async (e) => {
-        await register();
+        if(registerPassword === confirmPassword) {
+            await register();
+        }
+        else {
+            setErrorMsg('비밀번호가 일치하지 않습니다');
+        }
     };
+
+    const onCheck = async () => {
+        setEmailErrorMsg("");
+        const signInMethods = await fetchSignInMethodsForEmail(firebaseAuth, registerEmail);
+        if (signInMethods.length > 0) {
+            setEmailErrorMsg('이미 가입되어 있는 계정입니다');
+        } else {
+            setEmailErrorMsg('사용 가능한 이메일입니다');
+        }
+    }
 
     return (
         <div className="Signin">
@@ -86,13 +101,20 @@ const Signin = () => {
                 onChange={onChangeEmail}
                 placeholder={"이메일을 입력해주세요"}
             />
+            {emailErrorMsg && <p>{emailErrorMsg}</p>}
+            <button
+                className="idButton"
+                onClick={onCheck}
+            >
+                이메일 확인
+            </button>
             <input
                 type="password"
                 value={registerPassword}
                 onChange={onChangePassword}
                 placeholder={"비밀번호를 입력해주세요"}
             />
-            {/* <input
+            <input
                 type="password"
                 value={confirmPassword}
                 onChange={onChangeConfirmPassword}
@@ -109,10 +131,10 @@ const Signin = () => {
                 onChange={onChangePart}
                 placeholder={"파트를 입력해주세요"}
                 />
-            </div> */}
+            </div>
             {errorMsg && <p className="error-msg">{errorMsg}</p>}
             <button onClick={onSubmit}>회원가입</button>
-            <button onClick={register}>로그인하러 가기</button>
+            <p className="signup-link">이미 회원이신가요? <a href="/Login">로그인</a></p>
         </div>
     );
 };
