@@ -15,7 +15,6 @@ const Signup = () => {
     const [sPart, setPart] = useState('')
     const [checkEmail, setCheckEmail] = useState('')
     const [errorMsg, setErrorMsg] = useState('')
-    const [emailErrorMsg, setEmailErrorMsg] = useState('')
 
     const signupEmail = (e) => {
         setRegisterEmail(e.target.value)
@@ -75,15 +74,24 @@ const Signup = () => {
     }
 
     const onCheck = async () => {
-        setEmailErrorMsg("");
-        const signInMethods = await fetchSignInMethodsForEmail(firebaseAuth, registerEmail);
-        if (signInMethods.length > 0) {
-            setEmailErrorMsg('이미 가입되어 있는 계정입니다');
-        } else {
-            setEmailErrorMsg('사용 가능한 이메일입니다');
+        try {
+
+            const signInMethods = await fetchSignInMethodsForEmail(firebaseAuth, registerEmail);
+            console.log(signInMethods);
+            setCheckEmail('사용 가능한 이메일입니다!')
+        } catch(error) {
+            switch (error.code){
+                case 'auth/invalid-email':
+                    setErrorMsg('잘못된 이메일 주소입니다');
+                    break;
+               case 'email-already-in-use':
+                    setErrorMsg('이미 사용중인 이메일 입니다.')
+                    break;
+                default:
+                    setErrorMsg('사용할 수 없는 이메일입니다.');            
         }
     }
-
+    }
     const onSubmit = (e) => {
         e.preventDefault()
         if(registerPassword !== RePassword) {
@@ -105,7 +113,7 @@ const Signup = () => {
                         onChange={(e)=>setRegisterEmail(e.target.value)}/>
                 </div>
                 <div className="checkEmail">
-                    <button onClick= {onCheck}
+                    <button onClick= { onCheck }
                     >이메일 확인</button>
                 </div>
             </div>
@@ -153,7 +161,7 @@ const Signup = () => {
         >회원가입</button>
         {errorMsg && <p className = 'error'> {errorMsg} </p>}
     </section>
-    )
+    )  
 }
 
-export default Signup
+export default Signup;
