@@ -1,7 +1,7 @@
 import React, { useState,useContext } from "react";
 import "./Signup.css"
 import { useNavigate } from "react-router-dom";
-import { firebaseAuth , createUserWithEmailAndPassword, fetchSignInMethodsForEmail } from "./firebase";
+import { firebaseAuth , createUserWithEmailAndPassword } from "./firebase";
 import { LoginContext } from "./App";
 
 const Signup = () => {
@@ -15,6 +15,11 @@ const Signup = () => {
     const [sPart, setPart] = useState('')
     const [checkEmail, setCheckEmail] = useState('')
     const [errorMsg, setErrorMsg] = useState('')
+
+
+    console.log(checkEmail)
+  
+
 
     const signupEmail = (e) => {
         setRegisterEmail(e.target.value)
@@ -73,10 +78,10 @@ const Signup = () => {
         }
     }
 
+
     const onCheck = async () => {
         try {
-
-            const signInMethods = await fetchSignInMethodsForEmail(firebaseAuth, registerEmail);
+            const signInMethods = await createUserWithEmailAndPassword(firebaseAuth, registerEmail, 'akjsdfhlkajsdfhklasdfhlkajsdlkhfjahskdf');
             console.log(signInMethods);
             setCheckEmail('사용 가능한 이메일입니다!')
         } catch(error) {
@@ -111,6 +116,7 @@ const Signup = () => {
                         value = {registerEmail} 
                         placeholder='이메일를 입력해주세요' 
                         onChange={(e)=>setRegisterEmail(e.target.value)}/>
+                        <div>{checkEmail}</div>
                 </div>
                 <div className="checkEmail">
                     <button onClick= { onCheck }
