@@ -1,0 +1,19 @@
+.Home{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+}
+
+.Home button{
+    cursor:pointer;
+    width: 100px;
+    height: 40px;
+    border: none;
+    background: rgb(37,147,255);
+    color: white;
+    border-radius: 5px;
+    margin: 20px auto;
+}
