@@ -8,7 +8,7 @@ import {
 } from "../../components/input";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import { firebaseAuth, createUserWithEmailAndPassword } from "../../firebase";
 const JoinPage = () => {
   const [userInfo, setUserInfo] = useState({
     id: "",
@@ -23,8 +23,18 @@ const JoinPage = () => {
     e.preventDefault();
   };
 
-  const onClickJoinButton = () => {
-    nav("/login");
+  const onClickJoinButton = async () => {
+    try {
+      const createdUser = await createUserWithEmailAndPassword(
+        firebaseAuth,
+        userInfo.id,
+        userInfo.password
+      );
+      console.log(createdUser);
+      nav("/login");
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const onChangeInput = (e) => {
@@ -35,18 +45,26 @@ const JoinPage = () => {
     }));
   };
 
+  const isValid =
+    userInfo.password.length !== 0 &&
+    userInfo.passwordConfirm.length !== 0 &&
+    userInfo.password === userInfo.passwordConfirm;
+
   return (
     <>
-      <div>
-        <h1>회원가입 화면</h1>
+      <FormContainer>
+        <H1>회원가입 화면</H1>
         <JoinDiv onChange={onChangeInput}>
           <form onSubmit={onSubmitJoin}>
-            <StyledInput
-              name="id"
-              type="text"
-              value={userInfo.id}
-              placeholder="아이디를 입력해주세요"
-            />
+            <JoinDiv>
+              <StyledInput
+                name="id"
+                type="text"
+                value={userInfo.id}
+                placeholder="아이디를 입력해주세요"
+              />
+              <StyledButton>아이디 확인</StyledButton>
+            </JoinDiv>
             <StyledInput
               name="password"
               type="password"
@@ -59,9 +77,11 @@ const JoinPage = () => {
               value={userInfo.passwordConfirm}
               placeholder="비밀번호를 한번 더 입력해주세요"
             />
-            {userInfo.password === userInfo.passwordConfirm ? (
-              <PStyle>비밀번호가 확인되었습니다!</PStyle>
-            ) : null}
+            <PStyle isValid={isValid}>
+              {isValid
+                ? "비밀번호가 확인되었습니다!"
+                : "비밀번호가 일치하지 않습니다!"}
+            </PStyle>
           </form>
         </JoinDiv>
         <JoinDiv onChange={onChangeInput}>
@@ -78,10 +98,8 @@ const JoinPage = () => {
             placeholder="파트를 입력해주세요"
           />
         </JoinDiv>
-        <JoinDiv>
-          <StyledButton onClick={onClickJoinButton}>회원가입</StyledButton>
-        </JoinDiv>
-      </div>
+        <StyledButton onClick={onClickJoinButton}>회원가입</StyledButton>
+      </FormContainer>
     </>
   );
 };
@@ -90,5 +108,18 @@ export default JoinPage;
 
 const PStyle = styled.p`
   font-size: small;
-  color: blue;
+  color: ${(props) => (props.isValid ? "blue" : "red")};
+`;
+
+export const H1 = styled.h1`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+`;
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
 `;

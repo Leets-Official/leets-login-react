@@ -6,5 +6,9 @@ export const StyledButton = styled.button`
   padding: 15px 45px;
   border-radius: 15px;
   border: none;
-  margin-left: 75px;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
 `;
