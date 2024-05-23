@@ -1,0 +1,23 @@
+.Home {
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    gap: 10px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.Home button{
+    cursor: pointer;
+    font-size: 15px;
+    width: 400px;
+    height: 100px;
+    margin: auto;
+    margin-top: 100px;
+    border: none;
+    background-color: gainsboro;
+    padding: 30px 30px;
+    color: black;
+    border-radius: 50px 50px;
+    border: none;
+}

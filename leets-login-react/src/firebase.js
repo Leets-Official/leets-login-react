@@ -1,8 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/auth'
-import 'firebase/compat/database'
+import { getAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword, fetchSignInMethodsForEmail } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCOMCSvLvzfYv3jjR9MJoQEtnBEmV9Sx4w",
@@ -14,6 +12,7 @@ const firebaseConfig = {
   measurementId: "G-G88JX6TC7L"
 };
 
-const app = initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig);
+const firebaseAuth = getAuth(firebaseApp);
 
-export default app
+export { firebaseAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, fetchSignInMethodsForEmail }
