@@ -1,0 +1,25 @@
+.Attendance {
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    align-items: center;
+    text-align: center;
+    font-size: 15px;
+  }
+  
+  .Attendance section {
+    margin: 20px;
+    margin-top: 50px;
+  }
+  
+  .Attendance button{
+    font-size: 15px;
+    cursor: pointer;
+    width: 150px;
+    height: 50px;
+    margin: auto;
+    border: none;
+    background-color: gainsboro;
+    color: black;
+    border-radius: 40px;
+  }

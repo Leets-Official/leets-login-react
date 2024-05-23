@@ -1,0 +1,130 @@
+.signup{
+    box-sizing: border-box;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.email input {
+    background-color: gainsboro;
+    font-size: 15px;
+    border-radius: 50px 50px;
+    padding: 30px 50px;
+    width: 400px;
+    margin-top: 50px;
+    border-color: gainsboro;
+    border: none;
+    &::placeholder {
+        color: black;
+        text-align: center;
+      }
+}
+
+.password input {
+    background-color: gainsboro;
+    font-size: 15px;
+    border-radius: 50px 50px;
+    padding: 30px 50px;
+    margin-bottom: 0px;
+    width: 400px;
+    margin-top: 50px;
+    border-color: gainsboro;
+    border: none;
+    &::placeholder {
+        color: black;
+        text-align: center;
+      }
+}
+
+.RePassword input {
+    background-color: gainsboro;
+    font-size: 15px;
+    border-radius: 50px 50px;
+    padding: 30px 50px;
+    margin-bottom: 0px;
+    width: 400px;
+    margin-top: 50px;
+    border-color: gainsboro;
+    border: none;
+    &::placeholder {
+        color: black;
+        text-align: center;
+      }
+}
+
+.name input{
+    display: flex;
+    justify-content: left;
+    background-color: gainsboro;
+    font-size: 15px;
+    border-radius: 50px 50px;
+    padding: 30px 20px;
+    margin-bottom: 0px;
+    width: 200px;
+    margin-top: 50px;
+    border-color: gainsboro;
+    border: none;
+    &::placeholder {
+        color: black;
+        text-align: center;
+      }
+}
+
+.signup_main {
+    justify-content: center;
+}
+
+.part input{
+    display: flex;
+    justify-content: right;
+    background-color: gainsboro;
+    font-size: 15px;
+    border-radius: 50px 50px;
+    padding: 30px 20px;
+    margin-bottom: 50px;
+    width: 200px;
+    margin-top: 50px;
+    border-color: gainsboro;
+    border: none;
+    float: right;
+    &::placeholder {
+        color: black;
+        text-align: center;
+    }
+}
+
+.signup_button {
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: gainsboro;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 15px 20px;
+    width: 150px;
+}
+
+.two {
+    display: flex;
+    gap: 30px;
+}
+
+.check {
+    display: flex;
+    gap: 50px;
+}
+
+.checkEmail > button {
+    box-sizing: border-box;
+    background-color: gainsboro;
+    margin-top: 60px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 10px 20px;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    justify-content: center;
+    display: inline-flex;
+    align-items: center;
+}
