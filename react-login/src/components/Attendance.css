@@ -7,6 +7,13 @@
     justify-content: center;
     gap: 10px;
   }
+  .current-week {
+    background-color: rgb(97,147,255);
+    color: white;
+    border-radius: 5px;
+    padding:5px;
+    margin:10px;
+  }
   
   .attendance-week {
     width: 70px;
@@ -20,13 +27,7 @@
     padding:5px;
   }
   
-  .attendance-week.checked {
-    background-color: rgb(97,147,255);
-    color: white;
-    border-radius: 5px;
-    padding:5px;
-    margin:10px;
-  }
+
 
   .Attendance button{
     cursor:pointer;

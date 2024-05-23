@@ -1,16 +1,21 @@
 import './Register.css';
-import { useState, useContext } from 'react';
+import { useState, useContext} from 'react';
 import { createUserWithEmailAndPassword } from "firebase/auth"; // firebase/auth에서 createUserWithEmailAndPassword 함수 가져오기
 import { authService } from '../firebase'; // authService 가져오기
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../App';
+
 
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState(''); // confirmPassword 상태 추가
-    const [name, setName] = useState('');
-    const [part, setPart] = useState('');
-    const [error, setError] = useState(''); 
+    const [name, setUserName] = useState('');
+    const [part, setUserPart] = useState('');
+    const [error, setError] = useState('');
+    
+    const { setName, setPart } = useContext(UserContext);
+
 
     const navigate = useNavigate();
 
@@ -18,6 +23,8 @@ const Register = () => {
         try {
             await createUserWithEmailAndPassword(authService, email, password);
             setError(''); // 에러 초기화
+            setName(name);
+            setPart(part);
             // 회원가입 성공 시 로그인 페이지로 이동
             navigate('/');
         } catch (err) {
@@ -38,8 +45,8 @@ const Register = () => {
         if (name === 'email') setEmail(value);
         else if (name === 'password') setPassword(value);
         else if (name === 'confirmPassword') setConfirmPassword(value); // confirmPassword 값 설정
-        else if (name === 'name') setName(value);
-        else if (name === 'part') setPart(value);
+        else if (name === 'name') setUserName(value);
+        else if (name === 'part') setUserPart(value);
     };
 
     const onSubmit = (e) => {
